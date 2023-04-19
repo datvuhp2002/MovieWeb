@@ -1,0 +1,71 @@
+@import "../../../Mixin/mixin.scss";
+.carousel{
+    &::after{
+        content: "";
+        width: 100%;
+        height: 10%;
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(0deg, #06121e, transparent 50%);
+    }
+    .carousel-control-prev,.carousel-control-next{
+        width: auto!important;
+        .carousel-control-next-icon,.carousel-control-prev-icon{
+            width: 25px!important;
+            height: 25px!important;
+        }
+    }
+    .carousel-inner{
+        max-height: 600px;
+    }
+    .carousel-caption{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        h1,p{
+            text-align: start;
+            text-shadow: 2px 2px black;
+        }
+        h1{
+            font-size: 64px;
+        }
+        max-width: 500px;
+        
+        @include mobile{
+            left: 2rem;
+            top: 25%!important;
+            bottom: 25%!important;
+            h1{
+                white-space: nowrap;
+                font-size: 30px;
+            }
+            p{
+                display: none
+            };
+        }
+        @include tablet{
+            left: 3rem;
+            max-width: 50%;
+            p{
+                height: 50px;
+                // font-size: ;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                // white-space: nowrap;
+            }
+            h1{
+                font-size: 40px;
+            }
+
+            bottom: 10%!important;
+        }
+        @include desktop{
+
+            left: 6rem !important;
+            top: 25%!important;
+            bottom: 25%!important;
+        }
+       
+    }
+}
