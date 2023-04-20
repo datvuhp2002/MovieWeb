@@ -27,7 +27,7 @@ const publicRoutes = [
   {
     path: "/TelevisionMovies",
     component: TelevisionMovies,
-    namePage: "TelevisionMovies",
+    namePage: "Television Movies",
   },
   { path: "/NewMovie", component: NewMovie, namePage: "New Movie" },
   { path: "/FAQ", component: FAQ, namePage: "FAQ" },

@@ -1,8 +1,8 @@
 import React from "react";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../../components/Layout/DefaultLayout";
 import Body from "../../components/Layout/DefaultLayout/Body";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
 import { Row } from "react-bootstrap";
@@ -10,6 +10,7 @@ import { ResultsSearch } from "../../request";
 import ResultMovieList from "../../components/Layout/Movies/ResultMovieList";
 import { useEffect } from "react";
 import axios from "axios";
+import UseAxios from "../../request/UseAxios";
 const cx = classNames.bind(styles);
 export default function Search() {
   const [input, setInput] = useState("");

@@ -8,13 +8,14 @@ import moment from "moment/moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
-import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import SlickCast from "../Slick/SlickCast";
 import SlickTrailer from "../Slick/SlickTrailer";
 import SlickRecommendations from "../Slick/SlickRecommendations";
 import CastsCard from "../CastsCard";
 import TrailerCard from "../TrailerCard";
 import RecommendationsCard from "../RecommendationsCard";
+import SeasionCard from "../SeasionCard";
 const cx = classNames.bind(styles);
 
 export default function DetailMovie(props) {
@@ -35,13 +36,14 @@ export default function DetailMovie(props) {
     <Row className={cx("wrapper")}>
       <Col xxl={3} xl={3} lg={3} className="px-5 py-3">
         {data.poster_path && <Image w100 src={posterImg} />}
-        {/* <Button
-          leftIcon={<FontAwesomeIcon icon={faFilm} />}
-          // to={`/watch/:type/:genre/:name`}
+        <Button
+          play
+          className="mt-3 fs-3 fw-1"
+          leftIcon={<FontAwesomeIcon icon={faPlay} />}
           to={`/watch/${data.media_type || "movie"}/${data.id}`}
         >
           Xem phim
-        </Button> */}
+        </Button>
       </Col>
       <Col xxl={9} xl={9} lg={9} className={cx("main", "px-5 py-3")}>
         <h1>{data.title || data.original_title || data.original_name}</h1>

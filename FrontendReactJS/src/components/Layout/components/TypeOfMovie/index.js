@@ -57,13 +57,12 @@ export default function TypeOfMovie(props) {
   let [moviesUrl, setMoviesUrl] = useState(
     requestMoviesType(type, Category, currentPage)
   );
-  let result;
   useEffect(() => {
     moviesUrl = requestMoviesType(type, Category, currentPage);
     axios
       .get(moviesUrl)
-      .then((res) => {
-        setData(res.data.results);
+      .then(async (res) => {
+        await setData(res.data.results);
       })
       .catch((err) => {
         console.log(err);
@@ -108,7 +107,7 @@ export default function TypeOfMovie(props) {
       <Row>
         <Movie data={data} type={type} />
       </Row>
-      {data.length != 0 && (
+      {data.length !== 0 && (
         <ReactPaginate
           previousLabel={"previous"}
           breakLabel="..."

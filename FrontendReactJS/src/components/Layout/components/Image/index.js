@@ -9,6 +9,10 @@ const Image = ({
   className,
   fallback: customFallback = images.default,
   w100,
+  w50,
+  h100,
+  h50,
+  seasion,
   ...props
 }) => {
   const [fallback, setFallback] = useState("");
@@ -18,6 +22,10 @@ const Image = ({
   }
   const classes = cx("wrapper", {
     w100,
+    w50,
+    h100,
+    h50,
+    seasion,
     [className]: className,
   });
   return (

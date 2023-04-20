@@ -13,7 +13,7 @@ export default function Trending() {
         <span>Treding</span>
       </h2>
       {Trending.map((item, index) => {
-        if (index < 6) {
+        if (index < 12) {
           return <MovieCard key={index} {...item} />;
         }
       })}
