@@ -41,6 +41,11 @@ export const requestMoviesType = (type, genre, page = "1") => {
 export const ResultsSearch = (query) => {
   return `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
 };
-
+export const getSeasion = (id) => {
+  return `${BASE_URL}/tv/${id}?api_key=${API_KEY}&language=en-US&append_to_response=season`;
+};
+export const getEpisode = (id, season) => {
+  return `${BASE_URL}/tv/${id}/season/${season}?api_key=${API_KEY}&language=en-US`;
+};
 export default requests;
 // search https://api.themoviedb.org/3/search/multi?api_key=9195c13a37c697961a3f6920c92c27f0&language=en-US&page=1&include_adult=false

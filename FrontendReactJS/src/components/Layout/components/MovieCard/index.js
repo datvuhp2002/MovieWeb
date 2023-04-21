@@ -10,6 +10,7 @@ import Badge from "react-bootstrap/Badge";
 import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import LazyLoad from "react-lazyload";
 import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 const getPosterURL = (poster_path) => {
@@ -34,61 +35,10 @@ export default function MovieCard({
   media_type = "movie",
 }) {
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setShow(false);
-  };
-  // const handleShow = (breakpoint) => {
-  //   setShow(true);
-  // };
   const onMove = () => {
     navigate(`/Detail/${media_type}/${id}`);
   };
-  const showModal = () => {
-    return (
-      <Modal
-        show={show}
-        onHide={handleClose}
-        animation={true}
-        style={{ border: `0` }}
-        centered
-        dialogClassName="modalW"
-      >
-        <Modal.Header className="p-0" closeButton>
-          {backdrop_path && (
-            <Image className="w100" src={getBackDropURL(backdrop_path)}></Image>
-          )}
-          <div></div>
-        </Modal.Header>
-        <Modal.Body className="rounded-bottom py-4">
-          <div className="title">
-            <h1>{title || name}</h1>
-            <Button
-              leftIcon={<FontAwesomeIcon icon={faFilm} />}
-              trailer
-              onClick={onMove}
-            >
-              Detail
-            </Button>
-          </div>
-          <div className="d-flex align-center mb-3 justify-content-between ">
-            <div className="d-flex align-items-center">
-              <p className="text-success fw-1 me-2">
-                Vote average: {vote_average * 10}%
-              </p>
-              <div>
-                <Badge pill bg="secondary">
-                  {moment(release_date).format("YYYY") ||
-                    moment(first_air_date).format("YYYY")}
-                </Badge>
-              </div>
-            </div>
-          </div>
-          <p style={{ opacity: "0.7" }}>{overview}</p>
-        </Modal.Body>
-      </Modal>
-    );
-  };
+  const Loading = () => <div className={cx("lds-dual-ring")}></div>;
   return (
     <>
       <Col
@@ -101,23 +51,24 @@ export default function MovieCard({
         className={cx("wrapper", "mb-5")}
         onClick={onMove}
       >
-        <div className={cx("image")}>
-          <Image className="w100" src={getPosterURL(poster_path)}></Image>
-        </div>
-        <h3 className={cx("movie")}>
-          <span href="">{title || name}</span>
-        </h3>
-        {topRate ? (
-          <h3 className={cx("vote")}>
-            <span>Vote average: {vote_average}</span>
+        <LazyLoad placeholder={<Loading />}>
+          <div className={cx("image")}>
+            <Image className="w100" src={getPosterURL(poster_path)}></Image>
+          </div>
+          <h3 className={cx("movie")}>
+            <span href="">{title || name}</span>
           </h3>
-        ) : (
-          <h3 className={cx("date")}>
-            <span>Popularity: {popularity}</span>
-          </h3>
-        )}
+          {topRate ? (
+            <h3 className={cx("vote")}>
+              <span>Vote average: {vote_average}</span>
+            </h3>
+          ) : (
+            <h3 className={cx("date")}>
+              <span>Popularity: {popularity}</span>
+            </h3>
+          )}
+        </LazyLoad>
       </Col>
-      {showModal()}
     </>
   );
 }
