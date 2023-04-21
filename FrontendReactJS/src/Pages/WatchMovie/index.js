@@ -2,21 +2,29 @@ import React from "react";
 import DefaultLayout from "../../components/Layout/DefaultLayout";
 import Body from "../../components/Layout/DefaultLayout/Body";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import GetDataID from "../../request/GetDataID";
 import { getSeasion } from "../../request";
-import UseAxios from "../../request/UseAxios";
-import axios from "axios";
+import MovieContent from "../../components/Layout/components/MovieContent";
+import SeasonCard from "../../components/Layout/components/SeasonCard";
 export default function WatchMovie() {
   const { mediaType, idMovie } = useParams();
   let data = GetDataID(mediaType, idMovie);
+  console.log(data);
   const [linkMovie, setLinkMovie] = useState("");
-  const [seasonNumber, setSeasonNumber] = useState("1");
-  const [episodeNumber, setEpisodeNumber] = useState("1");
   const [List, setList] = useState([]);
   const urlSeasons = getSeasion(idMovie);
-  console.log("data", data.seasons);
+  const location = useLocation();
+  const [seasonNumber, setSeasonNumber] = useState("1");
+  const [episodeNumber, setEpisodeNumber] = useState("1");
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const season = searchParams.get("season");
+    const episodeNumber = searchParams.get("episode");
+    setSeasonNumber(season);
+    setEpisodeNumber(episodeNumber);
+  }, [location]);
   useEffect(() => {
     if (mediaType == "tv") {
       setLinkMovie(
@@ -27,25 +35,43 @@ export default function WatchMovie() {
     }
   }, [seasonNumber, episodeNumber]);
   useEffect(() => {}, [idMovie]);
-
   return (
     <DefaultLayout>
       <Body>
         <Row>
-          <Col xxl={8} xl={9} lg={6} md={6} sm={6} xs={6}>
+          <Col
+            xxl={mediaType === "movie" ? 12 : 8}
+            xl={mediaType === "movie" ? 12 : 8}
+            lg={12}
+            md={12}
+            sm={12}
+            xs={12}
+            className=""
+          >
             <div className="ratio ratio-21x9">
               <iframe
                 scrolling="no"
                 allowFullScreen
-                className="embed-responsive-item"
                 src={`${linkMovie}`}
               ></iframe>
             </div>
+            <div>
+              <MovieContent play={true} data={data} />
+            </div>
           </Col>
-          <Col xxl={6} xl={3} lg={6} md={6} sm={6} xs={6}>
+          <Col xxl={4} xl={4}>
             {data.seasons &&
               data.seasons.map((item, index) => {
-                return <div key={index}>{item.name}</div>;
+                return (
+                  <SeasonCard
+                    key={index}
+                    mediaType={mediaType}
+                    idMovie={idMovie}
+                    seasonNumber={seasonNumber}
+                    episodeNumber={episodeNumber}
+                    data={item}
+                  />
+                );
               })}
           </Col>
         </Row>

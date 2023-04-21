@@ -15,7 +15,7 @@ import SlickRecommendations from "../Slick/SlickRecommendations";
 import CastsCard from "../CastsCard";
 import TrailerCard from "../TrailerCard";
 import RecommendationsCard from "../RecommendationsCard";
-import SeasionCard from "../SeasionCard";
+import SeasionCard from "../SeasonCard";
 const cx = classNames.bind(styles);
 
 export default function DetailMovie(props) {
@@ -40,9 +40,11 @@ export default function DetailMovie(props) {
           play
           className="mt-3 fs-3 fw-1"
           leftIcon={<FontAwesomeIcon icon={faPlay} />}
-          to={`/watch/${data.media_type || "movie"}/${data.id}`}
+          to={`/watch/${data.media_type || "movie"}/${data.id}${
+            data.media_type == "movie" ? "" : "?season=1&episode=1"
+          }`}
         >
-          Xem phim
+          Play
         </Button>
       </Col>
       <Col xxl={9} xl={9} lg={9} className={cx("main", "px-5 py-3")}>

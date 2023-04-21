@@ -10,22 +10,28 @@ const Image = ({
   fallback: customFallback = images.default,
   w100,
   w50,
+  minw30,
   h100,
   h50,
-  seasion,
+  minh30,
+  season,
+  episode,
   ...props
 }) => {
   const [fallback, setFallback] = useState("");
-
+  const Loading = () => <div className={cx("lds-dual-ring")}></div>;
   function handleError() {
     setFallback(customFallback);
   }
   const classes = cx("wrapper", {
     w100,
     w50,
+    minw30,
     h100,
     h50,
-    seasion,
+    minh30,
+    season,
+    episode,
     [className]: className,
   });
   return (

@@ -1,28 +1,24 @@
-.wrapper{
+.wrapper {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: transparent;
+  h3 {
+    margin-top: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &:hover {
+    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 80%);
+    transition: 0.3s linear;
+    transform: translateY(-5px);
+  }
+  .movie {
+    font-size: 100%;
+    font-weight: 400;
 
-    width: 100%;
-    padding: 2px 1em 0 2px;
-    background-color: transparent;
-    h3{
-        margin-top: 0.5rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    a {
+      color: var(--white);
     }
-    &:hover{
-        box-shadow:  0px 0px 10px 2px rgb(0 0 0 / 80%);
-        transition:  .3s linear;
-        transform: translateY(-5px);
-    }
-    .movie {
-        font-size: 100%;
-        font-weight: 400;
-        
-        a{
-        color:var(--white);
-
-        }
-    }
-
+  }
 }
-

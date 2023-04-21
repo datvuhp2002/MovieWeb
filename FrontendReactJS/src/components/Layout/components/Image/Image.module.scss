@@ -7,13 +7,25 @@
 .w50 {
   width: 50%;
 }
+.minw30 {
+  min-width: 30%;
+}
 .h100 {
   height: 100%;
 }
 .h50 {
   height: 50%;
 }
-.seasion {
-  width: 15rem;
-  height: 15rem;
+.minh30 {
+  min-height: 30%;
+}
+.season {
+  border-radius: 5px;
+  max-width: 30%;
+  max-height: 30%;
+}
+.episode {
+  border-radius: 8px;
+  min-width: 22rem;
+  max-height: 12rem;
 }
